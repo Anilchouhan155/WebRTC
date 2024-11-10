@@ -13,6 +13,7 @@ class UserCreate(UserBase):
 
 class UserResponse(UserBase):
     user_id: str
+    naem: str
     profile_info: Optional[dict]
     preferences: Optional[dict]
     online_status: bool
