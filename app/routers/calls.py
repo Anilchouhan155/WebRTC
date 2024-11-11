@@ -15,10 +15,10 @@ async def signaling_endpoint(websocket: WebSocket, session_id: str):
     try:
         while True:
             data = await websocket.receive_json()
-            # Relay the data to the other peer(s)
+            # Introducing a bug: incorrect loop variable name
             for sid, connection in active_connections.items():
-                if sid != session_id:
-                    await connection.send_json(data)
+                if sid == session_id:  # Bug: should be sid != session_id
+                    await connectio.send_json(data)
     except WebSocketDisconnect:
         # Remove the connection when the client disconnects
         del active_connections[session_id]
